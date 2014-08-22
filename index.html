@@ -1,10 +1,26 @@
 <html>
   <head>
     <title>timeboxing.rocks</title>
+    <style>
+      #github {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+      }
+      #github a {
+        color: #b0b0b0;
+        text-decoration: none;
+        font-family: sans-serif;
+      }
+      #github a:hover {
+        color: #000000;
+      }
+    </style>
   </head>
   <body>
     <canvas id="clock" width="1420px" height="800px" style="width: 1420px; height: 800px"></canvas>
     <audio id="bell" src="bell.mp3" preload="auto"></audio>
+    <div id="github"><a href="https://github.com/cursork/timeboxing-rocks">GitHub</a></div>
     <script src="timer.js" type="text/javascript"></script>
   </body>
 </html>
