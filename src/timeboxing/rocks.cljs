@@ -38,7 +38,7 @@
 (def ticker (atom nil))
 
 (def countdown-milliseconds
-  (* (js/parseInt (js/prompt "How many minutes?" "30") 10)
+  (* (js/parseFloat (js/prompt "How many minutes?" "30"))
      60
      1000))
 
