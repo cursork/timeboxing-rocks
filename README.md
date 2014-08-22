@@ -7,7 +7,7 @@ An experiment in making the simplest possible timeboxing timer, driving ideas:
     time.
   * Conversely, with no idea of time left, it's too easy to overrun as
     discussions get bogged down.
-  * Announcing the time remaining at certain points in the meeting blocks
+  * Announcing the time remaining at certain points in the meeting interrupts
     conversations.
 2. No distracting movement or colours - ever tried handling a meeting when
    there's anything moving on the TV monitor?
