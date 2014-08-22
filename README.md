@@ -13,6 +13,7 @@ An experiment in making the simplest possible timeboxing timer, driving ideas:
    there's anything moving on the TV monitor?
 3. One circle = 1 hour for a consistent frame of reference. If you're
    timeboxing over 1 hour you are doing it wrong anyway.
+4. No pause. Pausing is cheating.
 
 The question is: Can a constantly visible, but unintrusive, tool encourage
 better use of timeboxed meetings?
