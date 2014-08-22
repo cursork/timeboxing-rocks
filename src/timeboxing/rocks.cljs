@@ -42,7 +42,7 @@
      60
      1000))
 
-(def when-to-end (+ (.now js/Date) countdown-milliseconds))
+(def when-to-end (atom (+ (.now js/Date) countdown-milliseconds)))
 
 (defn msecs-left->arc-pos
   "Convert number of milliseconds remaining to the relevant value for the
@@ -79,15 +79,28 @@
     (.load)
     (.play)))
 
-(defn tick
-  "Calculate time remaining and update the display. Recalculation is done not
-  to avoid JS's setInterval problems (which are not a problem at this scale!),
-  but rather to cope with a laptop being closed / going to sleep"
-  []
-  (let [remaining (Math/round (- when-to-end (.now js/Date)))]
-    (if (<= remaining 0)
-      (timeout)
-      (redraw remaining))))
+(let [cheat-code [38 38 40 40 37 39 37 39 66 65]
+      rest-cheat (atom cheat-code)]
+  (defn tick
+    "Calculate time remaining and update the display. Recalculation is done not
+    to avoid JS's setInterval problems (which are not a problem at this scale!),
+    but rather to cope with a laptop being closed / going to sleep"
+    []
+    (let [remaining (Math/round (- @when-to-end (.now js/Date)))]
+      (if (<= remaining 0)
+        (timeout)
+        (redraw remaining))))
+
+  (.addEventListener js/document
+    "keydown"
+    (fn [event]
+      (let [c (.-keyCode event)]
+        (if (= (first @rest-cheat) c)
+          (swap! rest-cheat rest)
+          (reset! rest-cheat cheat-code))
+        (when (empty? @rest-cheat)
+          (println "Boom")
+          (swap! when-to-end - 60000))))))
 
 (handle-resize)
 (reset! ticker (js/setInterval tick 1000))
