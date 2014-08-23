@@ -99,6 +99,7 @@
           (swap! rest-cheat rest)
           (reset! rest-cheat cheat-code))
         (when (empty? @rest-cheat)
+          (reset! rest-cheat cheat-code)
           (swap! when-to-end - 60000))))))
 
 (handle-resize)
