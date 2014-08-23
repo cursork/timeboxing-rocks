@@ -4,9 +4,9 @@
 
 ;; Laptop monitor is 1440 x 900. Hardcoded those as the defaults for my own
 ;; benefit, but it will resize automatically anyway.
-(def left 720)
-(def top  400)
-(def radius 350)
+(def left   (atom 720))
+(def top    (atom 400))
+(def radius (atom 350))
 (def line-width 30)
 (def canvas (.getElementById js/document "clock"))
 (def ctx (.getContext canvas "2d"))
@@ -28,9 +28,9 @@
     (set! (.-height canvas) ch)
     (set! (.-width (.-style canvas))  (str cw "px"))
     (set! (.-height (.-style canvas)) (str ch "px"))
-    (set! left   (/ w 2))
-    (set! top    (/ h 2))
-    (set! radius (- (min left top) 50))))
+    (reset! left   (/ w 2))
+    (reset! top    (/ h 2))
+    (reset! radius (- (min @left @top) 50))))
 
 (set! (.-onresize js/window)
       handle-resize)
@@ -64,7 +64,7 @@
   [msecs-left]
   (clear)
   (.beginPath ctx)
-  (.arc ctx left top radius (* 1.5 Math/PI) (msecs-left->arc-pos msecs-left) false)
+  (.arc ctx @left @top @radius (* 1.5 Math/PI) (msecs-left->arc-pos msecs-left) false)
 
   (set! (.-lineWidth ctx) line-width)
   (.stroke ctx))
